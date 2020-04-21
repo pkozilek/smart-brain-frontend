@@ -30,8 +30,15 @@ class App extends Component {
     super();
     this.state = {
       input: '',
-      imageUrl: ''
+      imageUrl: '',
+      box: {}
     }
+  }
+
+
+
+  displayFaceBox = (box) => {
+    this.setState({box: box})
   }
 
   onInputChange = (event) => {
@@ -42,16 +49,9 @@ class App extends Component {
     this.setState({imageUrl: this.state.input})
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL, 
-      this.state.input
-    ).then(
-      function(response) {
-        console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
-        // do something with response
-      },
-      function(err) {
-        // there was an error
-      }
-    );
+      this.state.input)
+    .then(response => this.displayFaceBox(response))
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -65,7 +65,7 @@ class App extends Component {
           onInputChange={this.onInputChange} 
           onSubmit={this.onSubmit}
         />
-        <FaceRecognition imageUrl={this.state.imageUrl}/>
+        <FaceRecognition imageUrl={this.state.imageUrl} box = {this.state.box}/>
       </div>
     );
   }
