@@ -21,7 +21,7 @@ const Boxes = ({box}) => {
     var boxes_div = []
     if (Object.keys(box).length > 0){
         var i;
-        for (i = 0; i < Object.keys(box).length; i++){
+        for (i = 0; i < Object.keys(box.outputs[0].data.regions).length; i++){
             box_i = calculateFaceLocation(box.outputs[0].data.regions[i].region_info.bounding_box)
             boxes_div.push({
                 style: {
