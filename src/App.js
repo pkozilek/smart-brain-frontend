@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3001')
+    fetch('https://polar-temple-80828.herokuapp.com')
       .then(response => response.json())
       .then(console.log)
   }
@@ -82,7 +82,7 @@ class App extends Component {
 
   onSubmit = () => {
     this.setState({imageUrl: this.state.input})
-    fetch('http://localhost:3001/imageurl', {
+    fetch('https://polar-temple-80828.herokuapp.com/imageurl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
